@@ -14,5 +14,9 @@ Algoritmo EvaluarEstudiante
 	
 	si notaFinal >= 90 Entonces
 		Escribir "Felicitaciones"
+	sino
+		si notaFinal >= 80 Entonces
+			Escribir "Sobresaliente"
+		FinSi
 	FinSi
 FinAlgoritmo
