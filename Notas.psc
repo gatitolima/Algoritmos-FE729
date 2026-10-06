@@ -1,7 +1,7 @@
 Algoritmo Notas
 	Definir nota1, nota2, examenfinal Como Real
 	Definir resultado Como Real
-	Definir estaAprobado Como Logico
+	Definir estaAprobado, datosOk Como Logico
 	
 	escribir "Ingrese la nota del primer parcial"
 	leer nota1
@@ -10,13 +10,26 @@ Algoritmo Notas
 	escribir "Ingrese la nota del examen final"
 	leer examenfinal
 	
-	resultado <- nota1 + nota2 + examenfinal
-	Escribir "Su nota final es: ", resultado
+	datosOk <- (nota1 >= 0) Y (nota1 <= 30)
+	datosOk <- datosOk Y (nota2 >= 0) Y (nota2 <= 30)
+	datosOk <- datosOk Y (examenfinal >= 0) Y (examenfinal <= 40)
+
 	
-	Si resultado >= 61 Entonces
-		Escribir "Aprobado"
+	Escribir "Datos validos: ", datosOk
+	
+	si datosOk = Verdadero Entonces
+		
+		resultado <- nota1 + nota2 + examenfinal		
+		Escribir "Su nota final es: ", resultado
+		
+		Si resultado >= 61 Entonces
+			Escribir "Aprobado"
+		SiNo
+			Escribir "Reprobado"
+		FinSi
+		
 	SiNo
-		Escribir "Reprobado"
+		Escribir "Datos incorrectos intente de nuevo"
 	FinSi
 	
 FinAlgoritmo
