@@ -16,19 +16,38 @@ FinSubAlgoritmo
 
 
 //subproceso para el ingreso de notas
-SubAlgoritmo ingresoDatos
-	Definir 
+SubAlgoritmo ingresoDatos(nombres Por Referencia, notas Por Referencia)
+	Definir i, j Como Entero
+	
 	Escribir "======================================"
 	Escribir "==         Ingreso de Datos         =="
 	Escribir "======================================"
+	Para i <- 1 Hasta 5 Hacer
+		Escribir "Ingrese el Nombre del alumno ", i," : "
+		Leer nombres[i]
+		Para j <- 1 Hasta 5 Hacer
+			Escribir "Ingrese la nota ", j, " : "
+			Leer notas[i,j]
+		FinPara
+	FinPara
 FinSubAlgoritmo
 
 
 //subproceso para mostrar los alumnos, notas y categorias
-SubAlgoritmo notasYcatego
+SubAlgoritmo notasYcatego(nombres, notas, prom)
+	Definir n, i, j Como Entero
+	Definir total Como Real
+	
 	Escribir "===================================="
 	Escribir "==       Notas y Categorias       =="
 	Escribir "===================================="
+	Escribir ""
+	Para i <- 1 Hasta 5 Hacer
+		Escribir "Alumno: ", nombres[i]
+		para j <- 1 Hasta 5 Hacer
+			Escribir "Nota ",[i], " : ", notas[i,j]
+		FinPara
+	FinPara
 FinSubAlgoritmo
 
 
@@ -51,17 +70,45 @@ SubAlgoritmo Error
 FinSubAlgoritmo
 
 
-SubProceso promedio 
+SubProceso  Promedio(notas Por Valor, prom Por Referencia, validacion por referencia)
+	definir i, j Como Entero
+	Definir total Como Real
 	
+	para i <- 1 Hasta 5 Hacer
+		total <- 0
+		para j <- 1 Hasta 5 Hacer
+			total <- total + notas[i,j]
+		FinPara
+		
+		prom[i] <- total /5
+		si prom[i] >= 90 y prom[i] <= 100 Entonces
+			validacion <- "Sobresaliente"
+		SiNo
+			si prom[i] >= 76 y prom[i] <= 89 Entonces
+				validacion <- "Notable"
+			SiNo
+				si prom[i] > 61 y prom[i] <= 75 Entonces
+					validacion <- "Satisfactorio"
+				SiNo
+					validacion <- "Insuficiente"
+				FinSi
+			FinSi		
+		FinSi
+		
+	FinPara
 FinSubProceso
+
+
 
 //programa principal
 Algoritmo sistemaNotas
-	Definir opIngresada Como Entero
-	Definir nombres Como Caracter
-	Definir notas Como Real
-	Dimensionar nombres[10]
-	Dimensionar notas[10,5]
+	Definir opIngresada, notas Como Entero
+	Definir nombres, validacion Como Caracter
+	Definir prom Como Real
+	
+	Dimensionar nombres[5]
+	Dimensionar notas[5,5]
+	Dimensionar prom[5]
 	Repetir
 		
 	menu
@@ -71,9 +118,9 @@ Algoritmo sistemaNotas
 	
 	segun opIngresada
 		1:
-			ingresoDatos
+			ingresoDatos(nombres, notas)
 		2:
-			notasYcatego
+			notasYcatego(nombres, notas, prom)
 		3:
 			Pextra
 	FinSegun
