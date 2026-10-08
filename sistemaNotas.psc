@@ -70,7 +70,7 @@ SubAlgoritmo Error
 FinSubAlgoritmo
 
 
-SubProceso  Promedio(notas Por Valor, prom Por Referencia, validacion por referencia)
+SubProceso  Promedio(notas Por Valor, prom Por Referencia)
 	definir i, j Como Entero
 	Definir total Como Real
 	
@@ -79,8 +79,14 @@ SubProceso  Promedio(notas Por Valor, prom Por Referencia, validacion por refere
 		para j <- 1 Hasta 5 Hacer
 			total <- total + notas[i,j]
 		FinPara
-		
 		prom[i] <- total /5
+	FinPara
+FinSubProceso
+
+SubProceso validar(prom por valor, validacion por referencia)
+	definir i como entero
+	
+	para i <- 1 hasta 5 Hacer
 		si prom[i] >= 90 y prom[i] <= 100 Entonces
 			validacion <- "Sobresaliente"
 		SiNo
@@ -91,13 +97,12 @@ SubProceso  Promedio(notas Por Valor, prom Por Referencia, validacion por refere
 					validacion <- "Satisfactorio"
 				SiNo
 					validacion <- "Insuficiente"
-				FinSi
-			FinSi		
-		FinSi
-		
+			FinSi
+		FinSi		
+	FinSi
+	
 	FinPara
 FinSubProceso
-
 
 
 //programa principal
@@ -109,6 +114,7 @@ Algoritmo sistemaNotas
 	Dimensionar nombres[5]
 	Dimensionar notas[5,5]
 	Dimensionar prom[5]
+	Dimensionar validacion[5]
 	Repetir
 		
 	menu
